@@ -13,13 +13,13 @@ data = [[entry[0], entry[0], entry[1], entry[2]] for entry in data]
 # input word, in-progress word, output word, meaning
 
 def distance(data):
-    return sum(Levenshtein.distance(entry[1], entry[2]) for entry in data)
+    return sum(Levenshtein.distance(entry[1], entry[2], weights=(100, 1, 1)) for entry in data)
 
 alphabet = list(set(''.join([entry[0] + entry[2] for entry in data])))
 
 substitutions = []
 
-for _ in range(10000):
+for _ in range(100000):
     print('.', end='')
     distance_before = distance(data)
 
